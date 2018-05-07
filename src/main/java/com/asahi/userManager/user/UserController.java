@@ -7,12 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @EnableAutoConfiguration
+@RequestMapping("/user")
 public class UserController {
 
-    @RequestMapping("/")
+    
     @ResponseBody
-    String home() {
+    @RequestMapping("/")
+    public String home() {
         return "Hello Worldasdasd!";
+    }
+    
+    @ResponseBody
+    @RequestMapping("/{id}")
+    public String getUserById(@PathVariable("id") String id) {
+        return "Hello: " + id;
     }
 
     public static void main(String[] args) throws Exception {
