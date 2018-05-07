@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
+import com.asahi.userManager.user.bean.User;
+
 @Controller
 @EnableAutoConfiguration
 @RequestMapping("/user")
@@ -19,8 +21,8 @@ public class UserController {
     
     @ResponseBody
     @RequestMapping("/{id}")
-    public String getUserById(@PathVariable("id") String id) {
-        return "Hello: " + id;
+    public User getUserById(@PathVariable("id") String id) {
+        return new User(Long.parseLong(id), "Hello");
     }
 
     public static void main(String[] args) throws Exception {
