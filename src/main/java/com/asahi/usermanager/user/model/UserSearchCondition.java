@@ -1,4 +1,4 @@
-package com.asahi.userManager.user.bean;
+package com.asahi.usermanager.user.model;
 
 public class UserSearchCondition {
 	
