@@ -1,4 +1,4 @@
-package com.asahi.userManager.user;
+package com.asahi.userManager.user.controller;
 
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
