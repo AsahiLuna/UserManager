@@ -18,9 +18,6 @@ public class UserServiceImpl implements UserServiceI {
 
     @Autowired
     UserRepository repository;
-    
-    @Resource  
-    private MongoTemplate mongoTemplate;
 
     public User getUserById(String mongoId) {
         return repository.findOne(mongoId);
@@ -41,11 +38,10 @@ public class UserServiceImpl implements UserServiceI {
         return targetUser;
     }
 
-//    public Page<User> searchUsers(UserSearchCondition condition) {
-//        PageRequest pageRequest = buildPageRequest(0,5,null);
-//        mongoTemplate.fin
-//        return repository.findAllByGender(condition.getGender(), pageRequest);
-//    }
+    public Page<User> searchUsers(UserSearchCondition condition) {
+        PageRequest pageRequest = buildPageRequest(0,5,null);
+        return repository.findAll(pageRequest);
+    }
 
     private PageRequest buildPageRequest(int page, int size, Sort sort) {
         return new PageRequest(page, size, sort);

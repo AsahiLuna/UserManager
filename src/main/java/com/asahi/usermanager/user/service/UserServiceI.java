@@ -13,5 +13,5 @@ public interface UserServiceI {
     User getUserById(String mongoId);
     User saveUser(User user);
     User removeUserById(String mongoId);
-//    Page<User> searchUsers(UserSearchCondition condition);
+    Page<User> searchUsers(UserSearchCondition condition);
 }

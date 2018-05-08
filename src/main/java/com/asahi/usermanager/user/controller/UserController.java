@@ -19,7 +19,7 @@ import com.asahi.usermanager.user.model.UserSearchCondition;
 import com.asahi.usermanager.user.service.UserServiceI;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired
@@ -43,9 +43,10 @@ public class UserController {
         return userDao.removeUserById(id);
     }
     
-//    @ResponseBody
-//    @GetMapping("/search")
-//    public Page<User> searchUser(UserSearchCondition condition) {
-//        return userDao.searchUsers(condition);
-//    }
+    @ResponseBody
+    @GetMapping("/search")
+    public Page<User> searchUser(UserSearchCondition condition) {
+        return userDao.searchUsers(condition);
+    }
+
 }
