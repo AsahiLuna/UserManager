@@ -9,9 +9,13 @@ public class User {
     @Id
     private String id;
     private String name;
-
-    public User() {}
     
+    private boolean isDeleted;
+
+
+	public User() {}
+    
+
     public User(String name) {
         this.name = name;
     }
@@ -19,6 +23,7 @@ public class User {
     public User(User user) {
         this.id = user.id.isEmpty() ? this.id : user.id;
         this.name = user.name;
+        this.isDeleted = user.isDeleted;
     }
 
 	public String getId() {
@@ -27,5 +32,13 @@ public class User {
 
     public String getName() {
         return name;
+    }
+    
+    public boolean isDeleted() {
+    	return isDeleted;
+    }
+    
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

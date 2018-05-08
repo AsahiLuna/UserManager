@@ -23,14 +23,19 @@ public class UserServiceImpl implements UserServiceI {
         return respository.save(user);
     }
 
-    public User removeUser(User user) {
-        // TODO Auto-generated method stub
-        return null;
+    public User removeUserById(String mongoId) {
+        User targetUser = respository.findOne(mongoId);
+        if (targetUser != null) {
+            if (!targetUser.isDeleted()) {
+                targetUser.setDeleted(true);
+                return respository.save(targetUser);
+            }
+        }
+        return targetUser;
     }
 
     public List<User> searchUsers(UserSearchCondition condition) {
         // TODO Auto-generated method stub
         return null;
     }
-
 }
