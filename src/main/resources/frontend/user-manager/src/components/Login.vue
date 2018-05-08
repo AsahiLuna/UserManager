@@ -1,5 +1,5 @@
 <template>
-  <div class="index" id="index">
+  <div class="login" id="login">
     <h1>{{ msg }}</h1>
     <router-view/>
   </div>
@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  name: 'index',
+  name: 'login',
   data () {
     return {
-      msg: 'Welcome to Your User Manager'
+      msg: 'Welcome to Your Login Page'
     }
   }
 }
