@@ -2,6 +2,8 @@ package com.asahi.usermanager.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +25,8 @@ public class UserController {
     }
     
     @ResponseBody
-    @RequestMapping("/save/{name}")
-    public User saveUser(@PathVariable("name") String name) {
-        return userDao.saveUser(new User(name));
+    @PostMapping("/save")
+    public User saveUser(@RequestBody User user) {
+        return userDao.saveUser(new User(user));
     }
 }
