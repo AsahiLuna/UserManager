@@ -11,7 +11,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
       component: Index,
       children: [
         {
@@ -21,7 +20,7 @@ export default new Router({
         },
         {
           path: 'content',
-          name: 'content',
+          name: 'user-content',
           component: Content
         }
       ]

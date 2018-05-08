@@ -17,7 +17,6 @@
           </div>
       </div>
       <router-view/>
-      <mfooter></mfooter>
     </div>
   </div>
 </template>
