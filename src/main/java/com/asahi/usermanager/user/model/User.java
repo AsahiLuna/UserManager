@@ -2,7 +2,6 @@ package com.asahi.usermanager.user.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
 @Document(collection = "mongo_user")
 public class User {

@@ -12,17 +12,15 @@ import com.asahi.usermanager.user.model.UserSearchCondition;
 @Service
 public class UserServiceImpl implements UserServiceI {
 
-//    @Autowired
-//    UserRepository respository;
+    @Autowired
+    UserRepository respository;
 
     public User getUserById(String mongoId) {
-//        return respository.findOne(mongoId);
-    	return null;
+        return respository.findOne(mongoId);
     }
 
     public User saveUser(User user) {
-//        return respository.save(user);
-    	return null;
+        return respository.save(user);
     }
 
     public User removeUser(User user) {
