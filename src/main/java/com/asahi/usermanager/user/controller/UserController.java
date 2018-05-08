@@ -43,9 +43,9 @@ public class UserController {
         return userDao.removeUserById(id);
     }
     
-    @ResponseBody
-    @GetMapping("/search")
-    public Page<User> searchUser(UserSearchCondition condition) {
-        return userDao.searchUsers(condition);
-    }
+//    @ResponseBody
+//    @GetMapping("/search")
+//    public Page<User> searchUser(UserSearchCondition condition) {
+//        return userDao.searchUsers(condition);
+//    }
 }

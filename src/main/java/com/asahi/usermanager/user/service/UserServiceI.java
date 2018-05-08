@@ -10,8 +10,8 @@ import com.asahi.usermanager.user.model.UserSearchCondition;
 
 @Component
 public interface UserServiceI {
-	User getUserById(String mongoId);
-	User saveUser(User user);
-	User removeUserById(String mongoId);
-	Page<User> searchUsers(UserSearchCondition condition);
+    User getUserById(String mongoId);
+    User saveUser(User user);
+    User removeUserById(String mongoId);
+//    Page<User> searchUsers(UserSearchCondition condition);
 }

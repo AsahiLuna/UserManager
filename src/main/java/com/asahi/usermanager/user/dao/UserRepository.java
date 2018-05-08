@@ -11,7 +11,5 @@ import org.springframework.data.repository.query.Param;
 import com.asahi.usermanager.user.model.User;
 
 public interface UserRepository extends MongoRepository<User, String>{
-
-    @Query(value = "")
-    Page<User> findAllByGender(String gender, Pageable pageable);
+    
 }

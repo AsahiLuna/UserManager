@@ -18,6 +18,9 @@ public class User {
     private String phoneNumber;
     private String email;
     
+    private Date updatedDate;
+    private Date createdDate;
+    
     private boolean isDeleted;
 
 
@@ -40,6 +43,9 @@ public class User {
             this.gender = Constants.UNKNOWN;
         }
         this.phoneNumber = user.phoneNumber;
+        Date nowDate = new Date();
+        this.updatedDate = nowDate;
+        this.createdDate = user.createdDate != null ? user.createdDate : nowDate;
     }
 
 	public String getId() {
@@ -76,4 +82,16 @@ public class User {
     public String getEmail() {
         return email;
     }
+
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+    
+    
 }

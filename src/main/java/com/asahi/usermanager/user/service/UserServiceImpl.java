@@ -1,12 +1,12 @@
 package com.asahi.usermanager.user.service;
 
-import java.util.List;
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.asahi.usermanager.user.dao.UserRepository;
@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserServiceI {
 
     @Autowired
     UserRepository repository;
+    
+    @Resource  
+    private MongoTemplate mongoTemplate;
 
     public User getUserById(String mongoId) {
         return repository.findOne(mongoId);
@@ -38,10 +41,11 @@ public class UserServiceImpl implements UserServiceI {
         return targetUser;
     }
 
-    public Page<User> searchUsers(UserSearchCondition condition) {
-        PageRequest pageRequest = buildPageRequest(0,5,null);
-        return repository.findAllByGender(condition.getGender(), pageRequest);
-    }
+//    public Page<User> searchUsers(UserSearchCondition condition) {
+//        PageRequest pageRequest = buildPageRequest(0,5,null);
+//        mongoTemplate.fin
+//        return repository.findAllByGender(condition.getGender(), pageRequest);
+//    }
 
     private PageRequest buildPageRequest(int page, int size, Sort sort) {
         return new PageRequest(page, size, sort);
