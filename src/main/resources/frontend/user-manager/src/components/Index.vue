@@ -3,7 +3,7 @@
     <div id="root">
       <div class="container">
           <div class="masthead">
-              <h3 class="text-muted">{{ msg }}</h3>
+              <h3 class="text-center">{{ msg }}</h3>
               <nav>
               <ul class="nav nav-justified">
                   <li class="active"><a href="#">Home</a></li>
