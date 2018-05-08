@@ -17,12 +17,6 @@ public class UserController {
 	UserServiceI userDao;
     
     @ResponseBody
-    @RequestMapping("/")
-    public String home() {
-        return "Hello Worldasdasd!";
-    }
-    
-    @ResponseBody
     @RequestMapping("/{id}")
     public User getUserById(@PathVariable("id") String id) {
         return userDao.getUserById(id);
