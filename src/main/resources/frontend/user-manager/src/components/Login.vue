@@ -1,6 +1,7 @@
 <template>
   <div class="login" id="login">
     <h1>{{ msg }}</h1>
+    <button type="button" class="btn btn-primary">Login</button>
     <router-view/>
   </div>
 </template>
