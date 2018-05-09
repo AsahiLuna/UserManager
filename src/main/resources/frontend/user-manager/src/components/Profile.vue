@@ -21,7 +21,11 @@
       <div class="form-group">
         <label for="birth-date" class="col-sm-2 control-label">Birth Date</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="birth-date" v-model="user.birthDate" placeholder="Please select your Birth Date">
+          <el-date-picker
+            v-model="user.birthDate"
+            type="date"
+            placeholder="Select date">
+          </el-date-picker>
         </div>
       </div>
       <div class="form-group">
