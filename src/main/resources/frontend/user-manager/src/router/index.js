@@ -14,12 +14,12 @@ export default new Router({
       component: Index,
       children: [
         {
-          path: '/',
+          path: 'login',
           name: 'login',
           component: Login
         },
         {
-          path: 'content',
+          path: '/',
           name: 'user-content',
           component: Content
         }
