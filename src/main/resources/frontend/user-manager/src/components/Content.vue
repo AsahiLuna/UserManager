@@ -87,7 +87,7 @@ export default {
   filters: {
     formatDate: function (value) {
       if (value != null) {
-        return new Date(parseInt(value)).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
+        return new Date(parseInt(value)).toLocaleDateString()
       } else {
         return value
       }
