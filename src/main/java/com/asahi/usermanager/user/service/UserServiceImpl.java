@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserServiceI {
 
     public Page<User> searchUsers(UserSearchCondition condition) {
         PageRequest pageRequest = buildPageRequest(0,5,null);
-        return repository.findAll(pageRequest);
+        return repository.findAllByIsDeleted(false, pageRequest);
     }
 
     private PageRequest buildPageRequest(int page, int size, Sort sort) {
