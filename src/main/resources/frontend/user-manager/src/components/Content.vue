@@ -26,7 +26,7 @@
             <td>{{user.phoneNumber}}</td>
             <td>{{user.updatedDate | formatDate}}</td>
             <td>
-              <a v-on:click="goEditProfile" class="btn btn-info btn-sm">
+              <a v-on:click="goEditProfile(user.id)" class="btn btn-info btn-sm">
                 <span class="glyphicon glyphicon-pencil"></span>
               </a>
                <a v-on:click="deleteUser(user.id)" class="btn btn-danger btn-sm">
@@ -72,8 +72,8 @@ export default {
         console.log(error)
       })
     },
-    goEditProfile: function () {
-      this.$router.push({ name: 'profile' })
+    goEditProfile: function (userId) {
+      this.$router.push({name: 'profile', params: {userId: userId}})
     },
     deleteUser: function (userId) {
       var _this = this
