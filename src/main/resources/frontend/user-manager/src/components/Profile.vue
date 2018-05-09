@@ -1,5 +1,5 @@
 <template>
-  <div class="login" id="login">
+  <div class="profile" id="profile">
     <h1>{{ msg }}</h1>
     <button type="button" class="btn btn-primary">Login</button>
     <router-view/>
@@ -8,10 +8,10 @@
 
 <script>
 export default {
-  name: 'login',
+  name: 'profile',
   data () {
     return {
-      msg: 'Welcome to Your Login Page'
+      msg: 'Welcome to Your profile Page'
     }
   }
 }
