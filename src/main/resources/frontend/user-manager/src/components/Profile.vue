@@ -34,8 +34,8 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="submit" class="btn btn-warning">Cancel</button>
+          <button v-on:click="saveUser" class="btn btn-primary">Save</button>
+          <button v-on:click="goBackToContent" class="btn btn-warning">Cancel</button>
         </div>
       </div>
     </form>
@@ -62,7 +62,7 @@ export default {
       msg: 'Welcome to Your profile Page'
     }
   },
-  mounted: function () {
+  created: function () {
     this.getUser()
   },
   methods: {
@@ -75,6 +75,18 @@ export default {
           console.log(error)
         })
       }
+    },
+    saveUser: function () {
+      var _this = this
+      this.$http.post('/users/save', _this.user).then(function (response) {
+        _this.user = response.data
+      }).catch(function (error) {
+        console.log(error)
+      })
+      _this.goBackToContent()
+    },
+    goBackToContent: function () {
+      this.$router.push({path: '/'})
     }
   }
 }
