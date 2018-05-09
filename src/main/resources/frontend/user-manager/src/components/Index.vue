@@ -60,21 +60,21 @@
 
 <script>
 export default {
-  name: "index",
-  data() {
+  name: 'index',
+  data () {
     return {
       active: false
-    };
+    }
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+    handleOpen (key, keyPath) {
+      console.log(key, keyPath)
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    handleClose (key, keyPath) {
+      console.log(key, keyPath)
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

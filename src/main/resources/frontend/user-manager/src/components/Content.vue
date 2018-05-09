@@ -2,7 +2,7 @@
   <div class="container">
     <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
     <div class="user-table">
-      <table class="table table-hover table-bordered">
+      <!-- <table class="table table-hover table-bordered">
         <thead>
           <tr>
             <th class="col-md-1">Id</th>
@@ -34,18 +34,40 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <el-table
+        :data="users"
+        border
+        style="width: 100%">
+        <el-table-column
+          prop="name"
+          label="姓名"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="gender"
+          label="性别"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="birthDate"
+          :formatter="dateFormat"
+          label="出生日期">
+        </el-table-column>
+      </el-table>
     </div>
     <router-view/>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'user-content',
   data () {
     return {
-      users: {
+      users: [{
         id: String,
         name: String,
         gender: String,
@@ -55,7 +77,7 @@ export default {
         email: String,
         phoneNumber: String,
         deleted: Boolean
-      },
+      }],
       msg: 'Welcome to Your User Manager Content'
     }
   },
@@ -81,15 +103,13 @@ export default {
       }).catch(function (error) {
         console.log(error)
       })
-    }
-  },
-  filters: {
-    formatDate: function (value) {
-      if (value != null) {
-        return new Date(parseInt(value)).toLocaleDateString()
-      } else {
-        return value
+    },
+    dateFormat: function (row, column) {
+      var date = row[column.property]
+      if (date === undefined) {
+        return ''
       }
+      return moment(new Date(date)).format('YYYY-MM-DD', moment.ISO_8601)
     }
   }
 }
