@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1 class="text-center">{{ msg }}</h1>
-    <!-- <button type="button" class="btn btn-primary" v-on:click="testAxios">Test</button> -->
+    <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
     <div class="user-table">
       <table class="table table-hover table-bordered">
         <thead>
@@ -26,10 +26,10 @@
             <td>{{user.phoneNumber}}</td>
             <td>{{user.updatedDate | formatDate}}</td>
             <td>
-              <a href="#" class="btn btn-info btn-sm">
+              <a v-on:click="goEditProfile" class="btn btn-info btn-sm">
                 <span class="glyphicon glyphicon-pencil"></span>
               </a>
-               <a href="#" class="btn btn-danger btn-sm">
+               <a v-on:click="deleteUser(user.id)" class="btn btn-danger btn-sm">
                 <span class="glyphicon glyphicon-trash"></span>
               </a>
             </td>
@@ -61,12 +61,23 @@ export default {
     }
   },
   mounted: function () {
-    this.testAxios()
+    this.searchUsers()
   },
   methods: {
-    testAxios: function () {
+    searchUsers: function () {
       var _this = this
       this.$http.get('/users/search').then(function (response) {
+        _this.users = response.data.content
+      }).catch(function (error) {
+        console.log(error)
+      })
+    },
+    goEditProfile: function () {
+      this.$router.push({ name: 'profile' })
+    },
+    deleteUser: function (userId) {
+      var _this = this
+      this.$http.delete('/users/' + userId).then(function (response) {
         _this.users = response.data.content
       }).catch(function (error) {
         console.log(error)
