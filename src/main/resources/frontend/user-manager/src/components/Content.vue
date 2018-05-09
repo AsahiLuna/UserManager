@@ -6,13 +6,13 @@
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
-            <th class="col-md-2">Id</th>
+            <th class="col-md-1">Id</th>
             <th class="col-md-1">Name</th>
             <th class="col-md-1">Gender</th>
             <th class="col-md-2">BirthDate</th>
             <th class="col-md-2">Email</th>
             <th class="col-md-1">Phone Number</th>
-            <th class="col-md-1">Updated Date</th>
+            <th class="col-md-2">Updated Date</th>
             <th class="col-md-1">Operation</th>
           </tr>
         </thead>
