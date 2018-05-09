@@ -47,12 +47,36 @@
         <el-table-column
           prop="gender"
           label="性别"
-          width="180">
+          width="80">
         </el-table-column>
         <el-table-column
           prop="birthDate"
           :formatter="dateFormat"
+          width="100"
           label="出生日期">
+        </el-table-column>
+        <el-table-column
+          prop="email"
+          width="200"
+          label="电子邮件">
+        </el-table-column>
+        <el-table-column
+          prop="phoneNumber"
+          width="180"
+          label="联系方式">
+        </el-table-column>
+        <el-table-column 
+          width="180"
+          label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -93,12 +117,12 @@ export default {
         console.log(error)
       })
     },
-    goEditProfile: function (userId) {
-      this.$router.push({name: 'profile', params: {userId: userId}})
+    handleEdit: function (index, row) {
+      this.$router.push({name: 'profile', params: {userId: row['id']}})
     },
-    deleteUser: function (userId) {
+    handleDelete: function (index, row) {
       var _this = this
-      this.$http.delete('/users/' + userId).then(function (response) {
+      this.$http.delete('/users/' + row['id']).then(function (response) {
         _this.searchUsers()
       }).catch(function (error) {
         console.log(error)
