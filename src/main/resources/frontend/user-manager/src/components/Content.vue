@@ -17,8 +17,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-bind:key="user.id" v-for="user in users">
-            <td>{{user.id}}</td>
+          <tr v-bind:key="user.id" v-for="(user, index) in users">
+            <td>{{index + 1}}</td>
             <td>{{user.name}}</td>
             <td>{{user.gender}}</td>
             <td>{{user.birthDate | formatDate}}</td>
@@ -78,7 +78,7 @@ export default {
     deleteUser: function (userId) {
       var _this = this
       this.$http.delete('/users/' + userId).then(function (response) {
-        _this.users = response.data.content
+        _this.searchUsers()
       }).catch(function (error) {
         console.log(error)
       })
