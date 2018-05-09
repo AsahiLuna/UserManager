@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1 class="text-center">{{ msg }}</h1>
     <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
     <div class="user-table">
       <table class="table table-hover table-bordered">
