@@ -63,7 +63,21 @@ export default {
     }
   },
   created: function () {
-    this.getUser()
+    if (this.$route.params.userId != null) {
+      this.getUser()
+    } else {
+      this.user = {
+        id: '',
+        name: '',
+        gender: 'unknown',
+        birthDate: new Date(),
+        createdDate: new Date(),
+        updatedDate: new Date(),
+        email: '',
+        phoneNumber: '',
+        deleted: false
+      }
+    }
   },
   methods: {
     getUser: function () {
