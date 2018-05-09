@@ -11,7 +11,11 @@
       <div class="form-group">
         <label for="gender" class="col-sm-2 control-label">Gender</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="gender" v-model="user.gender" placeholder="Please select your gender">
+          <select v-model="user.gender" class="form-control">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="unknown">Unknown</option>
+          </select>
         </div>
       </div>
       <div class="form-group">
