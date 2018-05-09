@@ -25,7 +25,14 @@
             <td>{{user.email}}</td>
             <td>{{user.phoneNumber}}</td>
             <td>{{user.updatedDate | formatDate}}</td>
-            <td>Edit Remove</td>
+            <td>
+              <a href="#" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+               <a href="#" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
