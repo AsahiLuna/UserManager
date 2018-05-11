@@ -15,7 +15,7 @@
       <el-form-item label="出生日期" required>
         <el-col :span="11">
           <el-form-item prop="birthDate">
-            <el-date-picker type="date" placeholder="选择出生日期" v-model="user.birthDate" style="width: 100%;"></el-date-picker>
+            <el-date-picker :picker-options="datePickOption" type="date" placeholder="选择出生日期" v-model="user.birthDate" style="width: 100%;"></el-date-picker>
           </el-form-item>
         </el-col>
       </el-form-item>
@@ -43,6 +43,11 @@ export default {
   name: 'profile',
   data () {
     return {
+      datePickOption: {
+        disabledDate: function (time) {
+          return time.getTime() > Date.now()
+        }
+      },
       rules: {
         name: [
           { required: true, message: '请输入用户名称', trigger: 'blur' },
