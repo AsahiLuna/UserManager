@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     public Page<User> searchUsers(UserSearchCondition condition) {
-        PageRequest pageRequest = buildPageRequest(condition.getPageNumber(), condition.getPageSize(),null);
+        PageRequest pageRequest = buildPageRequest(condition.getPageNumber(), condition.getPageSize(), "updatedDate");
         if (condition.getName() == null || condition.getName().isEmpty()) {
             return repository.findAllByIsDeleted(false, pageRequest);
         } else {            
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserServiceI {
         }
     }
 
-    private PageRequest buildPageRequest(int page, int size, Sort sort) {
-        return new PageRequest(page, size, sort);
+    private PageRequest buildPageRequest(int page, int size, String sort) {
+        return new PageRequest(page, size, Direction.DESC, sort);
     }
 }
