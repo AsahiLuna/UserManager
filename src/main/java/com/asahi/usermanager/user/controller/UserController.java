@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.asahi.usermanager.user.model.User;
 import com.asahi.usermanager.user.model.UserSearchCondition;
 import com.asahi.usermanager.user.service.UserServiceI;
+import com.asahi.usermanager.user.util.Constants;
 
 @RestController
 @RequestMapping("/users")
@@ -48,5 +49,4 @@ public class UserController {
     public Page<User> searchUser(UserSearchCondition condition) {
         return userDao.searchUsers(condition);
     }
-
 }

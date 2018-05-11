@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     public Page<User> searchUsers(UserSearchCondition condition) {
-        PageRequest pageRequest = buildPageRequest(0,5,null);
+        PageRequest pageRequest = buildPageRequest(condition.getPageNumber(), condition.getPageSize(),null);
         if (condition.getName() == null || condition.getName().isEmpty()) {
             return repository.findAllByIsDeleted(false, pageRequest);
         } else {            
