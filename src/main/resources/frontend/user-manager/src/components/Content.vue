@@ -2,53 +2,56 @@
   <div class="container">
     <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
     <div class="user-table">
-      <el-table
-        v-loading="isTableLoading"
-        :data="users"
-        border
-        style="width: 100%">
-        <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="gender"
-          label="性别"
-          :formatter="genderFormat"
-          width="80">
-        </el-table-column>
-        <el-table-column
-          prop="birthDate"
-          :formatter="dateFormat"
-          width="100"
-          label="出生日期">
-        </el-table-column>
-        <el-table-column
-          prop="email"
-          width="200"
-          label="电子邮件">
-        </el-table-column>
-        <el-table-column
-          prop="phoneNumber"
-          width="180"
-          label="联系方式">
-        </el-table-column>
-        <el-table-column
-          width="180"
-          label="操作">
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-       <div class="block">
+      <transition name="el-zoom-in-top">
+        <el-table
+          v-show="!isTableLoading" class="transition-table"
+          v-loading="isTableLoading"
+          :data="users"
+          border
+          style="width: 100%">
+          <el-table-column
+            prop="name"
+            label="姓名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="gender"
+            label="性别"
+            :formatter="genderFormat"
+            width="80">
+          </el-table-column>
+          <el-table-column
+            prop="birthDate"
+            :formatter="dateFormat"
+            width="100"
+            label="出生日期">
+          </el-table-column>
+          <el-table-column
+            prop="email"
+            width="200"
+            label="电子邮件">
+          </el-table-column>
+          <el-table-column
+            prop="phoneNumber"
+            width="180"
+            label="联系方式">
+          </el-table-column>
+          <el-table-column
+            width="180"
+            label="操作">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </transition>
+      <div class="block">
         <el-pagination
           background
           @size-change="handleSizeChange"
