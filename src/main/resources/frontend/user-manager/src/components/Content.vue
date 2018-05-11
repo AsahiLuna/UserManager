@@ -140,10 +140,25 @@ export default {
     },
     handleDelete: function (index, row) {
       var _this = this
-      this.$http.delete('/users/' + row['id']).then(function (response) {
-        _this.searchUsers()
-      }).catch(function (error) {
-        console.log(error)
+      this.$confirm('此操作将删除该用户, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$http.delete('/users/' + row['id']).then(function (response) {
+          _this.searchUsers()
+          _this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(function (error) {
+          console.log(error)
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     },
     dateFormat: function (row, column) {
