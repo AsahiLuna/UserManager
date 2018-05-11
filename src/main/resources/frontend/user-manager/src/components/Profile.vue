@@ -52,7 +52,7 @@ export default {
           { required: true, message: '请选择性别', trigger: 'change' }
         ],
         birthDate: [
-          { type: 'date', required: true, message: '请选择出生日期', trigger: 'change' }
+          { required: true, message: '请选择出生日期', trigger: 'change' }
         ],
         phoneNumber: [
           { required: true, message: '请输入电话号码', trigger: 'blur' }
@@ -65,7 +65,7 @@ export default {
         id: this.$route.params.userId,
         name: '',
         gender: '',
-        birthDate: new Date(),
+        birthDate: '',
         createdDate: Date,
         updatedDate: Date,
         email: '',
