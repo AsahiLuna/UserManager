@@ -19,7 +19,7 @@
                   <el-menu-item-group>
                     <template slot="title">搜索</template>
                     <el-menu-item index="1-1">
-                      <el-input v-model="inputSearchName" placeholder="请输入要搜索的用户姓名">
+                      <el-input v-model="inputSearchName" placeholder="请输入要搜索的用户姓名" @keyup.enter.native="searchByName()">
                         <el-button slot="append" icon="el-icon-search" @click="searchByName()"></el-button>
                       </el-input>
                     </el-menu-item>
