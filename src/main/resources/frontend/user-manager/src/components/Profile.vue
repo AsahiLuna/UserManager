@@ -1,51 +1,5 @@
 <template>
   <div class="profile container" id="profile">
-    <!-- <form class="form-horizontal col-sm-8" role="form">
-      <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" v-model="user.name" placeholder="Please input your name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="gender" class="col-sm-2 control-label">Gender</label>
-        <div class="col-sm-10">
-          <select v-model="user.gender" class="form-control">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="unknown">Unknown</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="birth-date" class="col-sm-2 control-label">Birth Date</label>
-        <div class="col-sm-10">
-          <el-date-picker
-            v-model="user.birthDate"
-            type="date"
-            placeholder="Select date">
-          </el-date-picker>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="phone-number" class="col-sm-2 control-label">Phone Number</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="phone-number" v-model="user.phoneNumber" placeholder="Please input your phone number">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="email" v-model="user.email" placeholder="Please input your Email">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button v-on:click="saveUser" class="btn btn-primary">Save</button>
-          <button v-on:click="goBackToContent" class="btn btn-warning">Cancel</button>
-        </div>
-      </div>
-    </form> -->
     <el-form :model="user" :rules="rules" ref="user" label-width="100px" class="demo-user">
       <el-form-item label="姓名" prop="name">
         <el-col :span="11">
@@ -91,25 +45,31 @@ export default {
     return {
       rules: {
         name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
+          { min: 1, max: 12, message: '长度在 1 到 12 个字符', trigger: 'blur' }
         ],
         gender: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+          { required: true, message: '请选择性别', trigger: 'change' }
         ],
         birthDate: [
           { type: 'date', required: true, message: '请选择出生日期', trigger: 'change' }
+        ],
+        phoneNumber: [
+          { required: true, message: '请输入电话号码', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '请输入电子邮箱', trigger: 'blur' }
         ]
       },
       user: {
         id: this.$route.params.userId,
-        name: String,
-        gender: String,
-        birthDate: Date,
+        name: '',
+        gender: '',
+        birthDate: '',
         createdDate: Date,
         updatedDate: Date,
-        email: String,
-        phoneNumber: String,
+        email: '',
+        phoneNumber: '',
         deleted: Boolean
       },
       msg: 'Welcome to Your profile Page'
