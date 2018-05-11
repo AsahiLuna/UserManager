@@ -1,7 +1,6 @@
 <template>
   <div class="profile container" id="profile">
-    <h1 class="text-center">{{ msg }}</h1>
-    <form class="form-horizontal col-sm-8" role="form">
+    <!-- <form class="form-horizontal col-sm-8" role="form">
       <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
@@ -46,7 +45,41 @@
           <button v-on:click="goBackToContent" class="btn btn-warning">Cancel</button>
         </div>
       </div>
-    </form>
+    </form> -->
+    <el-form :model="user" :rules="rules" ref="user" label-width="100px" class="demo-user">
+      <el-form-item label="姓名" prop="name">
+        <el-col :span="11">
+          <el-input v-model="user.name"></el-input>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="性别" prop="gender">
+        <el-select v-model="user.gender" placeholder="请选择性别">
+          <el-option label="男" value="male"></el-option>
+          <el-option label="女" value="female"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="出生日期" required>
+        <el-col :span="11">
+          <el-form-item prop="birthDate">
+            <el-date-picker type="date" placeholder="选择出生日期" v-model="user.birthDate" style="width: 100%;"></el-date-picker>
+          </el-form-item>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="电话号码" prop="phoneNumber">
+        <el-col :span="11">
+          <el-input v-model="user.phoneNumber" placeholder="请输入电话号码"></el-input>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="电子邮箱" prop="email">
+        <el-col :span="11">
+          <el-input v-model="user.email" placeholder="请输入电子邮箱"></el-input>
+        </el-col>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('user')">保存用户</el-button>
+        <el-button @click="goBackToContent()">取消</el-button>
+      </el-form-item>
+    </el-form>
     <router-view/>
   </div>
 </template>
@@ -56,6 +89,18 @@ export default {
   name: 'profile',
   data () {
     return {
+      rules: {
+        name: [
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        ],
+        gender: [
+          { required: true, message: '请选择活动区域', trigger: 'change' }
+        ],
+        birthDate: [
+          { type: 'date', required: true, message: '请选择出生日期', trigger: 'change' }
+        ]
+      },
       user: {
         id: this.$route.params.userId,
         name: String,
@@ -77,8 +122,8 @@ export default {
       this.user = {
         id: '',
         name: '',
-        gender: 'unknown',
-        birthDate: new Date(),
+        gender: 'male',
+        birthDate: '',
         createdDate: new Date(),
         updatedDate: new Date(),
         email: '',
@@ -109,6 +154,16 @@ export default {
     },
     goBackToContent: function () {
       this.$router.push({path: '/'})
+    },
+    submitForm: function (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.saveUser()
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
   }
 }
