@@ -2,39 +2,6 @@
   <div class="container">
     <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
     <div class="user-table">
-      <!-- <table class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th class="col-md-1">Id</th>
-            <th class="col-md-1">Name</th>
-            <th class="col-md-1">Gender</th>
-            <th class="col-md-2">BirthDate</th>
-            <th class="col-md-2">Email</th>
-            <th class="col-md-1">Phone Number</th>
-            <th class="col-md-2">Updated Date</th>
-            <th class="col-md-1">Operation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-bind:key="user.id" v-for="(user, index) in users">
-            <td>{{index + 1}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.gender}}</td>
-            <td>{{user.birthDate | formatDate}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.phoneNumber}}</td>
-            <td>{{user.updatedDate | formatDate}}</td>
-            <td>
-              <a v-on:click="goEditProfile(user.id)" class="btn btn-info btn-sm">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </a>
-               <a v-on:click="deleteUser(user.id)" class="btn btn-danger btn-sm">
-                <span class="glyphicon glyphicon-trash"></span>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
       <el-table
         :data="users"
         border
@@ -65,7 +32,7 @@
           width="180"
           label="联系方式">
         </el-table-column>
-        <el-table-column 
+        <el-table-column
           width="180"
           label="操作">
           <template slot-scope="scope">
@@ -79,6 +46,13 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-col :span="6" :push="10">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="1000">
+        </el-pagination>
+      </el-col>
     </div>
     <router-view/>
   </div>
