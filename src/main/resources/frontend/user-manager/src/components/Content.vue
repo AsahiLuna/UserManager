@@ -3,6 +3,7 @@
     <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
     <div class="user-table">
       <el-table
+        v-loading="isTableLoading"
         :data="users"
         border
         style="width: 100%">
@@ -71,6 +72,7 @@ export default {
   name: 'user-content',
   data () {
     return {
+      isTableLoading: true,
       searchName: '',
       pageNumber: 0,
       pageSize: 5,
@@ -109,6 +111,7 @@ export default {
   },
   methods: {
     searchUsers: function () {
+      this.isTableLoading = true
       var _this = this
       this.$http.get('/users/search', {
         params: {
@@ -123,6 +126,7 @@ export default {
         _this.numberOfElements = response.data.numberOfElements
         _this.isLastPage = response.data.last
         _this.isFirstPage = response.data.first
+        _this.isTableLoading = false
       }).catch(function (error) {
         console.log(error)
       })
