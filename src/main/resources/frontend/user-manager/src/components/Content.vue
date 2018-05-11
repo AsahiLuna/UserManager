@@ -65,6 +65,7 @@ export default {
   name: 'user-content',
   data () {
     return {
+      searchName: '',
       users: [{
         id: String,
         name: String,
@@ -82,10 +83,25 @@ export default {
   mounted: function () {
     this.searchUsers()
   },
+  computed: {
+    getSearchName: function () {
+      return this.$store.state.searchName
+    }
+  },
+  watch: {
+    getSearchName: function (val) {
+      this.searchName = val
+      this.searchUsers()
+    }
+  },
   methods: {
     searchUsers: function () {
       var _this = this
-      this.$http.get('/users/search').then(function (response) {
+      this.$http.get('/users/search', {
+        params: {
+          name: this.searchName
+        }
+      }).then(function (response) {
         _this.users = response.data.content
       }).catch(function (error) {
         console.log(error)

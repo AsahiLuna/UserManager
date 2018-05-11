@@ -25,9 +25,9 @@
                     </el-menu-item>
                   </el-menu-item-group>
                 </el-submenu>
-                <el-menu-item index="4">
+                <el-menu-item index="4" @click="addUser()">
                   <i class="el-icon-setting"></i>
-                  <span slot="title" @click="addUser()">
+                  <span slot="title">
                       Add User
                   </span>
                 </el-menu-item>
@@ -63,13 +63,13 @@ export default {
   },
   methods: {
     handleOpen: function (key, keyPath) {
-      console.log(key, keyPath)
+
     },
     handleClose: function (key, keyPath) {
-      console.log(key, keyPath)
+
     },
     searchByName: function () {
-      this.$router.push({name: 'user-content', params: {name: this.inputSearchName}})
+      this.$store.commit('search', this.inputSearchName)
     },
     addUser: function () {
       this.$router.push({name: 'profile'})
