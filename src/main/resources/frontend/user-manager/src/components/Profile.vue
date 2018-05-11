@@ -51,9 +51,9 @@ export default {
         gender: [
           { required: true, message: '请选择性别', trigger: 'change' }
         ],
-        birthDate: [
-          { type: 'date', required: true, message: '请选择出生日期', trigger: 'change' }
-        ],
+        // birthDate: [
+        //   { type: 'date', required: true, message: '请选择出生日期', trigger: 'change' }
+        // ],
         phoneNumber: [
           { required: true, message: '请输入电话号码', trigger: 'blur' }
         ],

@@ -14,6 +14,7 @@
         <el-table-column
           prop="gender"
           label="性别"
+          :formatter="genderFormat"
           width="80">
         </el-table-column>
         <el-table-column
@@ -124,6 +125,16 @@ export default {
         return ''
       }
       return moment(new Date(date)).format('YYYY-MM-DD', moment.ISO_8601)
+    },
+    genderFormat: function (row, column) {
+      var gender = row[column.property]
+      if (gender === 'male') {
+        return '男'
+      } else if (gender === 'female') {
+        return '女'
+      } else {
+        return '未知'
+      }
     }
   }
 }
