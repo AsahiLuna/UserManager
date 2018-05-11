@@ -4,7 +4,7 @@
       <el-container>
         <el-aside>
           <el-row class="tac">
-            <el-col :span="12">
+            <el-col :span="24">
               <h5>导航菜单</h5>
               <el-menu
                 default-active="2"
@@ -17,24 +17,18 @@
                     <span>Search</span>
                   </template>
                   <el-menu-item-group>
-                    <template slot="title">分组一</template>
-                    <el-menu-item index="1-1">选项1</el-menu-item>
-                    <el-menu-item index="1-2">选项2</el-menu-item>
+                    <template slot="title">搜索</template>
+                    <el-menu-item index="1-1">
+                      <el-input v-model="inputSearchName" placeholder="请输入要搜索的用户姓名">
+                        <el-button slot="append" icon="el-icon-search" @click="searchByName()"></el-button>
+                      </el-input>
+                    </el-menu-item>
                   </el-menu-item-group>
-                  <el-menu-item-group title="分组2">
-                    <el-menu-item index="1-3">选项3</el-menu-item>
-                  </el-menu-item-group>
-                  <el-submenu index="1-4">
-                    <template slot="title">选项4</template>
-                    <el-menu-item index="1-4-1">选项1</el-menu-item>
-                  </el-submenu>
                 </el-submenu>
                 <el-menu-item index="4">
                   <i class="el-icon-setting"></i>
-                  <span slot="title">
-                    <router-link id="goAddUserProfile" to="/profile" active-class="active">
+                  <span slot="title" @click="addUser()">
                       Add User
-                    </router-link>
                   </span>
                 </el-menu-item>
               </el-menu>
@@ -63,15 +57,22 @@ export default {
   name: 'index',
   data () {
     return {
-      active: false
+      active: false,
+      inputSearchName: ''
     }
   },
   methods: {
-    handleOpen (key, keyPath) {
+    handleOpen: function (key, keyPath) {
       console.log(key, keyPath)
     },
-    handleClose (key, keyPath) {
+    handleClose: function (key, keyPath) {
       console.log(key, keyPath)
+    },
+    searchByName: function () {
+      this.$router.push({name: 'user-content', params: {name: this.inputSearchName}})
+    },
+    addUser: function () {
+      this.$router.push({name: 'profile'})
     }
   }
 }
