@@ -15,4 +15,5 @@ public interface UserRepository extends MongoRepository<User, String>{
 
     Page<User> findAllByIsDeleted(boolean isDeleted, Pageable pageable);
     
+    Page<User> findAllByNameLikeAndIsDeleted(String name, boolean isDeleted, Pageable pageable);
 }

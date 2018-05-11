@@ -46,6 +46,7 @@ public class UserController {
     @ResponseBody
     @GetMapping("/search")
     public Page<User> searchUser(UserSearchCondition condition) {
+        System.out.println(condition);
         return userDao.searchUsers(condition);
     }
 
