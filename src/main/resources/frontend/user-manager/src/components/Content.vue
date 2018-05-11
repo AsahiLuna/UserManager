@@ -47,13 +47,19 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-col :span="6" :push="10">
+       <div class="block">
+        <span class="demonstration">完整功能</span>
         <el-pagination
           background
-          layout="prev, pager, next"
-          :total="1000">
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pageNumber + 1"
+          :page-sizes="[5, 10, 20, 50]"
+          :page-size="pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalElements">
         </el-pagination>
-      </el-col>
+      </div>
     </div>
     <router-view/>
   </div>
@@ -67,6 +73,13 @@ export default {
   data () {
     return {
       searchName: '',
+      pageNumber: 0,
+      pageSize: 5,
+      totalPages: 0,
+      totalElements: 0,
+      numberOfElements: 0, // Current page's number of elements
+      isLastPage: true,
+      isFirstPage: true,
       users: [{
         id: String,
         name: String,
@@ -100,13 +113,28 @@ export default {
       var _this = this
       this.$http.get('/users/search', {
         params: {
-          name: this.searchName
+          name: this.searchName,
+          pageNumber: this.pageNumber,
+          pageSize: this.pageSize
         }
       }).then(function (response) {
         _this.users = response.data.content
+        _this.totalPages = response.data.totalPages
+        _this.totalElements = response.data.totalElements
+        _this.numberOfElements = response.data.numberOfElements
+        _this.isLastPage = response.data.last
+        _this.isFirstPage = response.data.first
       }).catch(function (error) {
         console.log(error)
       })
+    },
+    handleSizeChange: function (pageSize) {
+      this.pageSize = pageSize
+      this.searchUsers()
+    },
+    handleCurrentChange: function (pageNumber) {
+      this.pageNumber = pageNumber - 1
+      this.searchUsers()
     },
     handleEdit: function (index, row) {
       this.$router.push({name: 'profile', params: {userId: row['id']}})
