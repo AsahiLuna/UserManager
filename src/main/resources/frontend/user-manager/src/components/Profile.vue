@@ -116,10 +116,10 @@ export default {
         headers: {'Authorization': _this.$store.state.accessToken}
       }).then(function (response) {
         _this.user = response.data
+        _this.goBackToContent()
       }).catch(function (error) {
         console.log(error)
       })
-      _this.goBackToContent()
     },
     goBackToContent: function () {
       this.$router.push({name: 'user-content'})
