@@ -13,7 +13,7 @@
                 @close="handleClose">
                 <el-submenu index="1">
                   <template slot="title">
-                    <i class="el-icon-location"></i>
+                    <i class="el-icon-search"></i>
                     <span>Search</span>
                   </template>
                   <el-menu-item-group>
@@ -25,10 +25,16 @@
                     </el-menu-item>
                   </el-menu-item-group>
                 </el-submenu>
-                <el-menu-item index="4" @click="addUser()">
+                <el-menu-item index="2" @click="addUser()">
                   <i class="el-icon-setting"></i>
                   <span slot="title">
                       Add User
+                  </span>
+                </el-menu-item>
+                <el-menu-item index="3" @click="loginDialogFormVisible = !loginDialogFormVisible">
+                  <i class="el-icon-info"></i>
+                  <span slot="title">
+                      Sign In
                   </span>
                 </el-menu-item>
               </el-menu>
