@@ -131,7 +131,10 @@ export default {
         _this.isFirstPage = response.data.first
         _this.isTableLoading = false
       }).catch(function (error) {
-        console.log(error)
+        _this.$message({
+          type: 'error',
+          message: error.response.data
+        })
       })
     },
     handleSizeChange: function (pageSize) {
@@ -159,7 +162,10 @@ export default {
             message: '删除成功!'
           })
         }).catch(function (error) {
-          console.log(error)
+          _this.$message({
+            type: 'error',
+            message: error.response.data
+          })
         })
       }).catch(() => {
         this.$message({
