@@ -118,7 +118,7 @@ export default {
       _this.goBackToContent()
     },
     goBackToContent: function () {
-      this.$router.push({path: '/'})
+      this.$router.push({name: 'user-content'})
     },
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
