@@ -101,7 +101,9 @@ export default {
     getUser: function () {
       var _this = this
       if (_this.user.id != null) {
-        this.$http.get('/users/' + _this.user.id).then(function (response) {
+        this.$http.get('/users/' + _this.user.id, {
+          headers: {'Authorization': _this.$store.state.accessToken}
+        }).then(function (response) {
           _this.user = response.data
         }).catch(function (error) {
           console.log(error)
@@ -110,7 +112,9 @@ export default {
     },
     saveUser: function () {
       var _this = this
-      this.$http.post('/users/save', _this.user).then(function (response) {
+      this.$http.post('/users/save', _this.user, {
+        headers: {'Authorization': _this.$store.state.accessToken}
+      }).then(function (response) {
         _this.user = response.data
       }).catch(function (error) {
         console.log(error)

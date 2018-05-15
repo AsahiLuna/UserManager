@@ -75,6 +75,7 @@ export default {
   name: 'user-content',
   data () {
     return {
+      accessToken: '',
       isTableLoading: true,
       searchName: '',
       pageNumber: 0,
@@ -104,11 +105,18 @@ export default {
   computed: {
     getSearchName: function () {
       return this.$store.state.searchName
+    },
+    getAuthorization: function () {
+      return this.$store.state.accessToken
     }
   },
   watch: {
     getSearchName: function (val) {
       this.searchName = val
+      this.searchUsers()
+    },
+    getAuthorization: function (val) {
+      this.accessToken = val
       this.searchUsers()
     }
   },
@@ -121,7 +129,8 @@ export default {
           name: this.searchName,
           pageNumber: this.pageNumber,
           pageSize: this.pageSize
-        }
+        },
+        headers: {'Authorization': _this.$store.state.accessToken}
       }).then(function (response) {
         _this.users = response.data.content
         _this.totalPages = response.data.totalPages
@@ -131,10 +140,7 @@ export default {
         _this.isFirstPage = response.data.first
         _this.isTableLoading = false
       }).catch(function (error) {
-        _this.$message({
-          type: 'error',
-          message: error.response.data
-        })
+        _this.checkResponseError(error)
       })
     },
     handleSizeChange: function (pageSize) {
@@ -153,9 +159,12 @@ export default {
       this.$confirm('此操作将删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning'
+        type: 'warning',
+        center: true
       }).then(() => {
-        this.$http.delete('/users/' + row['id']).then(function (response) {
+        this.$http.delete('/users/' + row['id'], {
+          headers: {'Authorization': _this.$store.state.accessToken}
+        }).then(function (response) {
           _this.searchUsers()
           _this.$message({
             type: 'success',
@@ -166,6 +175,7 @@ export default {
             type: 'error',
             message: error.response.data
           })
+          _this.checkResponseError()
         })
       }).catch(() => {
         this.$message({
@@ -173,6 +183,15 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    checkResponseError (error) {
+      this.$message({
+        type: 'error',
+        message: error.response.data
+      })
+      if (error.response.data.message === 'Access Denied') {
+        this.$store.commit('login', true)
+      }
     },
     dateFormat: function (row, column) {
       var date = row[column.property]

@@ -24,6 +24,13 @@ module.exports = {
         pathRewrite: {
         '^/api': 'http://localhost:8080/admins' //路径重写 
         }
+      },
+      '/login': {
+        target: 'http://localhost:8080', //源地址
+        changeOrigin: true, //改变源 
+        pathRewrite: {
+        '^/api': 'http://localhost:8080/login' //路径重写 
+        }
       }
     },
 

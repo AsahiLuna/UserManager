@@ -44,6 +44,20 @@
             </el-button>
           </el-header>
           <el-main>
+            <el-dialog title="登录窗口" :visible.sync="loginDialogFormVisible">
+              <el-form :model="admin">
+                <el-form-item label="用户名" :label-width="formLabelWidth">
+                  <el-input v-model="admin.username" auto-complete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" :label-width="formLabelWidth">
+                  <el-input type="password" v-model="admin.password" auto-complete="off"></el-input>
+                </el-form-item>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="loginDialogFormVisible = false">取 消</el-button>
+                <el-button type="primary" @click="login()">确 定</el-button>
+              </div>
+            </el-dialog>
             <router-view/>
           </el-main>
         </el-container>
@@ -57,8 +71,23 @@ export default {
   name: 'index',
   data () {
     return {
+      admin: {
+        username: '',
+        password: ''
+      },
+      formLabelWidth: '120px',
       active: false,
       inputSearchName: ''
+    }
+  },
+  computed: {
+    loginDialogFormVisible: {
+      get: function () {
+        return this.$store.state.displayLoginDialog
+      },
+      set: function (newValue) {
+        this.$store.commit('login', newValue)
+      }
     }
   },
   methods: {
@@ -73,6 +102,16 @@ export default {
     },
     addUser: function () {
       this.$router.push({name: 'profile'})
+    },
+    login: function () {
+      var _this = this
+      this.$http.post('/login', _this.admin).then(function (response) {
+        console.log(response.headers.authorization)
+        _this.$store.commit('token', response.headers.authorization)
+        _this.loginDialogFormVisible = false
+      }).catch(function (error) {
+        console.log(error)
+      })
     }
   }
 }

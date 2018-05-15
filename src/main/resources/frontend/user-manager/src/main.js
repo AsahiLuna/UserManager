@@ -18,11 +18,19 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
-    searchName: ''
+    searchName: '',
+    displayLoginDialog: false,
+    accessToken: ''
   },
   mutations: {
     search (state, name) {
       state.searchName = name
+    },
+    login (state, value) {
+      state.displayLoginDialog = value
+    },
+    token (state, value) {
+      state.accessToken = value
     }
   }
 })
