@@ -1,7 +1,5 @@
 package com.asahi.usermanager.user.model;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,16 +9,7 @@ public class Admin {
     String id;
     String username;
     String password;
-    private List<Role> roles;
-    
     public Admin() {}
-    
-    public Admin(Admin admin) {
-        this.id = admin.id.isEmpty() ? this.id : admin.id;
-        this.username = admin.username;
-        this.password = admin.password;
-
-    }
     
     public String getId() {
         return id;
@@ -40,14 +29,4 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    
 }

@@ -17,6 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableMongoRepositories("com.asahi.usermanager.user.dao")
 // same as @Configuration @EnableAutoConfiguration @ComponentScan
 public class Application {
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

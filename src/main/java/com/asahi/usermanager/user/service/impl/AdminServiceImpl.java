@@ -20,8 +20,7 @@ public class AdminServiceImpl implements AdminServiceI {
     }
 
     public Admin saveAdmin(Admin admin) {
-        // TODO Auto-generated method stub
-        return null;
+        return repository.save(admin);
     }
 
     public Admin removeAdminById(String mongoId) {
