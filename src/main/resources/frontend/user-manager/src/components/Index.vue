@@ -104,6 +104,7 @@ export default {
 
     },
     searchByName: function () {
+      this.$router.push({name: 'user-content'})
       this.$store.commit('search', this.inputSearchName)
     },
     addUser: function () {

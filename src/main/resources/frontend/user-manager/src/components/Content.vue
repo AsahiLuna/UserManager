@@ -1,6 +1,14 @@
 <template>
   <div class="container">
-    <!-- <button type="button" class="btn btn-primary" v-on:click="searchUsers">Test</button> -->
+    <el-tag
+      v-if="getSearchName != ''"
+      :key="tag"
+      v-for="tag in [getSearchName]"
+      closable
+      :disable-transitions="false"
+      @close="handleClose(tag)">
+      {{tag}}
+    </el-tag>
     <el-row type="flex" class="row-bg" justify="center">
       <div class="user-table">
         <transition name="el-zoom-in-top">
@@ -163,6 +171,9 @@ export default {
       }).catch(function (error) {
         _this.checkResponseError(error)
       })
+    },
+    handleClose: function (tag) {
+      this.$store.commit('search', '')
     },
     handleSizeChange: function (pageSize) {
       this.pageSize = pageSize
