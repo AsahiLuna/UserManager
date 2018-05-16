@@ -1,13 +1,11 @@
 package com.asahi.usermanager.user.service.impl;
 
-import javax.annotation.Resource;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import com.asahi.usermanager.user.dao.UserRepository;
@@ -56,6 +54,7 @@ public class UserServiceImpl implements UserServiceI {
 
     public User cancelDeleteUserById(String id) {
         User user = getUserById(id);
+        user.setUpdatedDate(new Date());
         user.setDeleted(false);
         return saveUser(user);
     }
