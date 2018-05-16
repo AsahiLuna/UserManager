@@ -1,19 +1,39 @@
 package com.asahi.usermanager.user.model;
 
 public class UserSearchCondition {
+
     public UserSearchCondition() {}
     
-    public UserSearchCondition(String name, int pageNumber, int pageSize) {
+    public UserSearchCondition(String name, int pageNumber, int pageSize, int isDeleted) {
         this.name = name;
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
+        this.isDeleted = isDeleted;
     }
     
+
     private String name;
     
     private int pageNumber;
     
     private int pageSize;
+
+    private int isDeleted;
+    
+    
+    @Override
+    public String toString() {
+        return "UserSearchCondition [name=" + name + ", pageNumber=" + pageNumber + ", pageSize=" + pageSize
+                + ", isDeleted=" + isDeleted + "]";
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
     public String getName() {
         return name;
@@ -33,10 +53,6 @@ public class UserSearchCondition {
     }
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-    @Override
-    public String toString() {
-        return "UserSearchCondition [name=" + name + ", pageNumber=" + pageNumber + ", pageSize=" + pageSize + "]";
     }
     
     

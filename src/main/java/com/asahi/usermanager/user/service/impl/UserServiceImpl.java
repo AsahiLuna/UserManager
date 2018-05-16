@@ -42,14 +42,21 @@ public class UserServiceImpl implements UserServiceI {
 
     public Page<User> searchUsers(UserSearchCondition condition) {
         PageRequest pageRequest = buildPageRequest(condition.getPageNumber(), condition.getPageSize(), "updatedDate");
+        boolean isDeleted = condition.getIsDeleted() == 1 ? true : false;
         if (condition.getName() == null || condition.getName().isEmpty()) {
-            return repository.findAllByIsDeleted(false, pageRequest);
+            return repository.findAllByIsDeleted(isDeleted, pageRequest);
         } else {            
-            return repository.findAllByNameLikeAndIsDeleted(condition.getName(), false, pageRequest);
+            return repository.findAllByNameLikeAndIsDeleted(condition.getName(), isDeleted, pageRequest);
         }
     }
 
     private PageRequest buildPageRequest(int page, int size, String sort) {
         return new PageRequest(page, size, Direction.DESC, sort);
+    }
+
+    public User cancelDeleteUserById(String id) {
+        User user = getUserById(id);
+        user.setDeleted(false);
+        return saveUser(user);
     }
 }
