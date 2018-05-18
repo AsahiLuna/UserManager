@@ -19,9 +19,9 @@
           </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="电话号码" prop="phoneNumber">
+      <el-form-item label="手机号码" prop="phoneNumber">
         <el-col :span="11">
-          <el-input v-model="user.phoneNumber" placeholder="请输入电话号码"></el-input>
+          <el-input v-model="user.phoneNumber" placeholder="请输入手机号码"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="电子邮箱" prop="email">
@@ -42,6 +42,32 @@
 export default {
   name: 'profile',
   data () {
+    var validateEmail = (rule, value, callback) => {
+      var emailPattern = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
+      if (value === '') {
+        callback(new Error('请输入邮箱'))
+      } else {
+        if (this.user.email !== '') {
+          if (!emailPattern.test(this.user.email)) {
+            callback(new Error('请输入格式正确的邮箱'))
+          }
+        }
+      }
+      callback()
+    }
+    var validatePhoneNumber = (rule, value, callback) => {
+      var phoneNumberPattern = /^[1][3,4,5,7,8][0-9]{9}$/
+      if (value === '') {
+        callback(new Error('请输入手机号码'))
+      } else {
+        if (this.user.phoneNumber !== '') {
+          if (!phoneNumberPattern.test(this.user.phoneNumber)) {
+            callback(new Error('请输入格式正确的手机号码'))
+          }
+        }
+      }
+      callback()
+    }
     return {
       datePickOption: {
         disabledDate: function (time) {
@@ -60,10 +86,10 @@ export default {
           { required: true, message: '请选择出生日期', trigger: 'change' }
         ],
         phoneNumber: [
-          { required: true, message: '请输入电话号码', trigger: 'blur' }
+          { validator: validatePhoneNumber, trigger: 'blur' }
         ],
         email: [
-          { required: true, message: '请输入电子邮箱', trigger: 'blur' }
+          { validator: validateEmail, trigger: 'blur' }
         ]
       },
       user: {
@@ -101,7 +127,9 @@ export default {
     getUser: function () {
       var _this = this
       if (_this.user.id != null) {
-        this.$http.get('/users/' + _this.user.id).then(function (response) {
+        this.$http.get('/users/' + _this.user.id, {
+          headers: {'Authorization': _this.$store.state.accessToken}
+        }).then(function (response) {
           _this.user = response.data
         }).catch(function (error) {
           console.log(error)
@@ -110,15 +138,17 @@ export default {
     },
     saveUser: function () {
       var _this = this
-      this.$http.post('/users/save', _this.user).then(function (response) {
+      this.$http.post('/users/save', _this.user, {
+        headers: {'Authorization': _this.$store.state.accessToken}
+      }).then(function (response) {
         _this.user = response.data
+        _this.goBackToContent()
       }).catch(function (error) {
         console.log(error)
       })
-      _this.goBackToContent()
     },
     goBackToContent: function () {
-      this.$router.push({path: '/'})
+      this.$router.push({name: 'user-content'})
     },
     submitForm: function (formName) {
       this.$refs[formName].validate((valid) => {
