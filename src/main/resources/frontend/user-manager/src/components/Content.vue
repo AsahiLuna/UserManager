@@ -7,7 +7,7 @@
       closable
       :disable-transitions="false"
       @close="handleClose(tag)">
-      {{tag}}
+      <el-breadcrumb-item>当前搜索条件</el-breadcrumb-item>{{tag}}
     </el-tag>
     <el-row type="flex" class="row-bg" justify="center">
       <div class="user-table">
