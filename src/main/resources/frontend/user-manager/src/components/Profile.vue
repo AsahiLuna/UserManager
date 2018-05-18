@@ -42,6 +42,19 @@
 export default {
   name: 'profile',
   data () {
+    var validateEmail = (rule, value, callback) => {
+      var emailPattern = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
+      if (value === '') {
+        callback(new Error('请输入邮箱'))
+      } else {
+        if (this.user.email !== '') {
+          if (!emailPattern.test(this.user.email)) {
+            callback(new Error('请输入格式正确的邮箱'))
+          }
+        }
+      }
+      callback()
+    }
     return {
       datePickOption: {
         disabledDate: function (time) {
@@ -63,7 +76,7 @@ export default {
           { required: true, message: '请输入电话号码', trigger: 'blur' }
         ],
         email: [
-          { required: true, message: '请输入电子邮箱', trigger: 'blur' }
+          { validator: validateEmail, trigger: 'blur' }
         ]
       },
       user: {
