@@ -43,7 +43,7 @@
             <el-table-column
               prop="phoneNumber"
               width="180"
-              label="联系方式">
+              label="手机号码">
             </el-table-column>
             <el-table-column
               width="180"

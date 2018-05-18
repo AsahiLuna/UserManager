@@ -19,9 +19,9 @@
           </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="电话号码" prop="phoneNumber">
+      <el-form-item label="手机号码" prop="phoneNumber">
         <el-col :span="11">
-          <el-input v-model="user.phoneNumber" placeholder="请输入电话号码"></el-input>
+          <el-input v-model="user.phoneNumber" placeholder="请输入手机号码"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="电子邮箱" prop="email">
@@ -55,6 +55,19 @@ export default {
       }
       callback()
     }
+    var validatePhoneNumber = (rule, value, callback) => {
+      var phoneNumberPattern = /^[1][3,4,5,7,8][0-9]{9}$/
+      if (value === '') {
+        callback(new Error('请输入手机号码'))
+      } else {
+        if (this.user.phoneNumber !== '') {
+          if (!phoneNumberPattern.test(this.user.phoneNumber)) {
+            callback(new Error('请输入格式正确的手机号码'))
+          }
+        }
+      }
+      callback()
+    }
     return {
       datePickOption: {
         disabledDate: function (time) {
@@ -73,7 +86,7 @@ export default {
           { required: true, message: '请选择出生日期', trigger: 'change' }
         ],
         phoneNumber: [
-          { required: true, message: '请输入电话号码', trigger: 'blur' }
+          { validator: validatePhoneNumber, trigger: 'blur' }
         ],
         email: [
           { validator: validateEmail, trigger: 'blur' }
